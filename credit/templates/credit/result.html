@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farm Credit Score</title>
+</head>
+<body>
+    <h1>Farm Credit Score Calculator</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if result %}
+        <h2>Results</h2>
+        {% if result.final_score %}
+            <p>Soil Fertility Rating: {{ result.soil_rating }}/100</p>
+            <p>Weather Risk Score: {{ result.weather_score }}</p>
+            <p>Regional Factor Score: {{ result.regional_score }}</p>
+            <p>Farm Size Score: {{ result.farm_score }}</p>
+            <p><strong>Final Credit Score: {{ result.final_score }}</strong></p>
+        {% else %}
+            <p>{{ result }}</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
