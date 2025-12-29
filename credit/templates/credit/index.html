@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriCredit - Smart Farm Assessment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'credit/css/style.css' %}">
+</head>
+<body>
+    <div class="background-glob"></div>
+    <div class="container">
+        <header>
+            <h1>AgriCredit</h1>
+            <p>AI-Powered Farm Creditworthiness Assessment</p>
+        </header>
+
+        <main>
+            <section class="glass-card form-section">
+                <form id="credit-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label>Location Method</label>
+                        <div class="toggle-container">
+                            <button type="button" class="toggle-btn active" data-target="city-input">City Name</button>
+                            <button type="button" class="toggle-btn" data-target="coords-input">Coordinates</button>
+                        </div>
+                    </div>
+
+                    <div id="city-input" class="location-group">
+                        <div class="input-wrapper">
+                            <label for="city">City Name</label>
+                            <input type="text" id="city" name="city" placeholder="e.g. Mumbai">
+                        </div>
+                    </div>
+
+                    <div id="coords-input" class="location-group hidden">
+                        <div class="row">
+                            <div class="input-wrapper">
+                                <label for="latitude">Latitude</label>
+                                <input type="number" step="any" id="latitude" name="latitude" placeholder="19.0760">
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="longitude">Longitude</label>
+                                <input type="number" step="any" id="longitude" name="longitude" placeholder="72.8777">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"><span>Soil Health</span></div>
+
+                    <div class="row">
+                        <div class="input-wrapper">
+                            <label for="nitrogen">Nitrogen (N)</label>
+                            <input type="number" step="any" id="nitrogen" name="nitrogen" required placeholder="mg/kg">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="phosphorus">Phosphorus (P)</label>
+                            <input type="number" step="any" id="phosphorus" name="phosphorus" required placeholder="mg/kg">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="potassium">Potassium (K)</label>
+                            <input type="number" step="any" id="potassium" name="potassium" required placeholder="mg/kg">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="input-wrapper">
+                            <label for="ph">pH Level</label>
+                            <input type="number" step="0.1" id="ph" name="ph" required placeholder="0-14">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="organic_carbon">Organic Carbon</label>
+                            <input type="number" step="any" id="organic_carbon" name="organic_carbon" required placeholder="%">
+                        </div>
+                    </div>
+
+                    <div class="section-divider"><span>Farm Details</span></div>
+
+                    <div class="input-wrapper">
+                        <label for="farm_size">Farm Size (Acres)</label>
+                        <input type="number" step="any" id="farm_size" name="farm_size" required placeholder="e.g. 2.5">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Calculate Score</button>
+                </form>
+            </section>
+
+            <section id="result-section" class="glass-card result-section hidden">
+                <h2>Assessment Result</h2>
+                <div class="score-circle">
+                    <span id="score-value">--</span>
+                    <small>Credit Score</small>
+                </div>
+                
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <span class="label">Weather Condition</span>
+                        <span id="weather-condition" class="value">--</span>
+                    </div>
+                     <div class="detail-item">
+                        <span class="label">Soil Rating</span>
+                        <span id="soil-rating" class="value">--</span>
+                    </div>
+                     <div class="detail-item">
+                        <span class="label">Farm Score</span>
+                        <span id="farm-score" class="value">--</span>
+                    </div>
+                </div>
+                <button id="reset-btn" class="secondary-btn">New Assessment</button>
+            </section>
+        </main>
+    </div>
+    <script src="{% static 'credit/js/script.js' %}"></script>
+</body>
+</html>

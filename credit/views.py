@@ -12,6 +12,10 @@ from .credit_utils import (
     get_farm_size_score,
     calculate_credit_score
 )
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'credit/index.html')
 
 
 @api_view(['POST'])
